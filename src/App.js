@@ -11,7 +11,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSummary('Loading...');
-    const res = await axios.post('http://localhost:8000/ask', { question });
+    const res = await axios.post('https://nhl-stats-app-uzq2.onrender.com/ask', { question });
     setSummary(res.data.summary);
     setResults(res.data.data);
   };
