@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.results table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.results th, .results td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
