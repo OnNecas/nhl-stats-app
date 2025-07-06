@@ -1,55 +1,66 @@
-// src/App.js
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './App.css'; // we'll style this next
 
 function App() {
   const [question, setQuestion] = useState('');
   const [summary, setSummary] = useState('');
-  const [results, setResults] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSummary('Loading...');
-    const res = await axios.post('http://localhost:8000/ask', { question });
-    setSummary(res.data.summary);
-    setResults(res.data.data);
+  const askQuestion = async () => {
+    if (!question.trim()) return;
+    setLoading(true);
+    try {
+      const response = await axios.post('http://localhost:8000/ask', { question });
+      setSummary(response.data.summary);
+      setData(response.data.data);
+    } catch (err) {
+      setSummary("❌ Error: " + err.message);
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="App">
-      <h1>🏒 NHL Stats Assistant</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="app">
+      <h1 className="title">🏒 NHL Stats AI</h1>
+      <div className="input-group">
         <input
+          className="question-input"
           type="text"
-          placeholder="Ask a hockey question..."
+          placeholder="Ask about NHL players..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && askQuestion()}
         />
-        <button type="submit">Ask</button>
-      </form>
-
-      <div className="summary">
-        <h2>🧠 Summary</h2>
-        <p>{summary}</p>
+        <button className="ask-button" onClick={askQuestion}>Ask</button>
       </div>
 
-      {results.length > 0 && (
-        <div className="results">
-          <h2>📊 Results</h2>
-          <table>
+      {loading && <div className="loading">⏳ Working on your request...</div>}
+
+      {summary && (
+        <div className="summary-box">
+          <strong>Summary:</strong> {summary}
+        </div>
+      )}
+
+      {data.length > 0 && (
+        <div className="table-wrapper">
+          <table className="stats-table">
             <thead>
               <tr>
-                {Object.keys(results[0]).map((col) => (
-                  <th key={col}>{col}</th>
+                {Object.keys(data[0]).map((key) => (
+                  <th key={key}>{key}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {results.map((row, idx) => (
+              {data.map((row, idx) => (
                 <tr key={idx}>
-                  {Object.values(row).map((cell, i) => (
-                    <td key={i}>{cell}</td>
+                  {Object.values(row).map((val, i) => (
+                    <td key={i}>{val}</td>
                   ))}
                 </tr>
               ))}

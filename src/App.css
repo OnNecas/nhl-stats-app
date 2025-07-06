@@ -1,28 +1,103 @@
-.App {
+/* App.css */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
   text-align: center;
-  padding: 2rem;
-  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  color: #003366;
+  margin-bottom: 1.5rem;
 }
 
-input {
-  width: 60%;
-  padding: 10px;
-  font-size: 16px;
-  margin-right: 10px;
+.input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.results table {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 80%;
-}
-
-.results th, .results td {
+.question-input {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.question-input:focus {
+  border-color: #0066cc;
+}
+
+.ask-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.ask-button:hover {
+  background-color: #0055aa;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.summary-box {
+  background-color: #e6f2ff;
+  border: 1px solid #cce0ff;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  color: #003366;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.stats-table th,
+.stats-table td {
+  border: 1px solid #ddd;
+  padding: 0.6rem;
+  text-align: left;
+}
+
+.stats-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.stats-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.stats-table tr:hover {
+  background-color: #eef6ff;
 }
