@@ -1,14 +1,21 @@
 # backend/main.py
 import pandas as pd
 import sqlite3
+
+from environs import Env
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
 
-# Set your OpenAI key
-openai.api_key = ""
-client = openai.OpenAI(api_key="")  # Replace with your key
+# Initialize the Env instance
+env = Env()
+env.read_env()  # Reads a .env file if present
+
+# Define and parse environment variables
+OPEN_AI_KEY = env.str("OPEN_AI_KEY", default=None)
+
+client = openai.OpenAI(api_key=OPEN_AI_KEY) 
 app = FastAPI()
 
 # Allow frontend requests
